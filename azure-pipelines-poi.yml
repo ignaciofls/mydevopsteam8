@@ -3,8 +3,14 @@
 # Add steps that run tests, create a NuGet package, deploy, and more:
 # https://docs.microsoft.com/azure/devops/pipelines/languages/dotnet-core
 
+# specific path build
 trigger:
-- master
+  branches:
+    include:
+    - master
+  paths:
+    include:
+    - apis/poi/*
 
 pool:
   vmImage: 'ubuntu-latest'
