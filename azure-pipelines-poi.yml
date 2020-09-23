@@ -27,6 +27,10 @@ steps:
 - script: dotnet test apis/poi/tests/UnitTests/UnitTests.csproj
   displayName: 'dotnet test'
 
+- script: pwd
+  
+- script: printenv
+
 - task: AzureCLI@2
   inputs:
     azureSubscription: 'OTA-PRD-447(5f20e20f-aa5b-4aef-b6a0-6a17499fad01)'
