@@ -33,4 +33,4 @@ steps:
     scriptType: 'bash'
     scriptLocation: 'inlineScript'
     inlineScript: 'az acr build --image "devopsoh/api-poi:${BASEIMAGETAG}" --registry $ACRNAME --file Dockerfile'
-    workingDirectory: '/apis/poi/web'
+    workingDirectory: 'apis/poi/web'
