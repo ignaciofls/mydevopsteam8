@@ -1,0 +1,34 @@
+# Java (Maven)
+# Build your Java project.
+# Add steps that test, save build artifacts, deploy, and more:
+# https://docs.microsoft.com/azure/devops/pipelines/languages/java
+
+trigger:
+  branches:
+    include:
+    - master
+  paths:
+    include:
+    - apis/user-java/*
+
+pool:
+  vmImage: 'ubuntu-latest'
+
+variables:
+  buildConfiguration: 'Release'
+  ACRNAME: 'openhackt259mvo0acr'
+  BASEIMAGETAG: '$(Build.BuildNumber)'
+
+steps:
+- task: Maven@3
+  inputs:
+    mavenPomFile: 'apis/user-java/pom.xml'
+
+- task: AzureCLI@2
+  condition: eq(variables['Build.SourceBranch'], 'refs/heads/master')
+  inputs:
+    azureSubscription: 'OTA-PRD-447(5f20e20f-aa5b-4aef-b6a0-6a17499fad01)'
+    scriptType: 'bash'
+    scriptLocation: 'inlineScript'
+    inlineScript: 'az acr build --image "devopsoh/api-user-java:${BASEIMAGETAG}" --registry $ACRNAME --file Dockerfile .'
+    workingDirectory: 'apis/user-java'
