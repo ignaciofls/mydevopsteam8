@@ -14,6 +14,9 @@ variables:
   GOROOT: '/usr/local/go1.11' # Go installation path
   GOPATH: '$(system.defaultWorkingDirectory)/gopath' # Go workspace path
   modulePath: '$(GOPATH)/src/github.com/$(build.repository.name)' # Path to the module's code
+  buildConfiguration: 'Release'
+  ACRNAME: 'openhackt259mvo0acr'
+  BASEIMAGETAG: '$(Build.BuildNumber)'
 
 steps:
 - task: GoTool@0
@@ -39,3 +42,11 @@ steps:
     command: test
     workingDirectory: apis/trips
 
+- task: AzureCLI@2
+  condition: eq(variables['Build.SourceBranch'], 'refs/heads/master')
+  inputs:
+    azureSubscription: 'OTA-PRD-447(5f20e20f-aa5b-4aef-b6a0-6a17499fad01)'
+    scriptType: 'bash'
+    scriptLocation: 'inlineScript'
+    inlineScript: 'az acr build --image "devopsoh/api-trips:${BASEIMAGETAG}" --registry $ACRNAME --file Dockerfile .'
+    workingDirectory: 'apis/trips'
