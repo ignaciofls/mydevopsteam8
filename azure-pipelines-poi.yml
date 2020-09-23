@@ -32,6 +32,7 @@ steps:
 - script: printenv
 
 - task: AzureCLI@2
+  condition: eq(variables['Build.SourceBranch'], 'refs/heads/master')
   inputs:
     azureSubscription: 'OTA-PRD-447(5f20e20f-aa5b-4aef-b6a0-6a17499fad01)'
     scriptType: 'bash'
