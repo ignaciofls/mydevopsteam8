@@ -32,5 +32,5 @@ steps:
     azureSubscription: 'OTA-PRD-447(5f20e20f-aa5b-4aef-b6a0-6a17499fad01)'
     scriptType: 'bash'
     scriptLocation: 'inlineScript'
-    inlineScript: 'az acr build --image "devopsoh/api-poi:${BASEIMAGETAG}" --registry $ACRNAME --file Dockerfile'
+    inlineScript: 'az acr build --image "devopsoh/api-poi:${BASEIMAGETAG}" --registry $ACRNAME --file Dockerfile .'
     workingDirectory: 'apis/poi/web'
