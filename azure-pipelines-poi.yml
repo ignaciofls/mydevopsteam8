@@ -18,7 +18,7 @@ pool:
 variables:
   buildConfiguration: 'Release'
   ACRNAME: 'openhackt259mvo0acr'
-  BASEIMAGETAG: 'v1' 
+  BASEIMAGETAG: '$(Build.BuildNumber)' 
 
 steps:
 - script: dotnet build apis/poi/poi.sln --configuration $(buildConfiguration)
