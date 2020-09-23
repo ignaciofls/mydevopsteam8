@@ -17,6 +17,8 @@ pool:
 
 variables:
   buildConfiguration: 'Release'
+  ACRNAME: 'openhackt259mvo0acr.azurecr.io'
+  BASEIMAGETAG: 'v1' 
 
 steps:
 - script: dotnet build apis/poi/poi.sln --configuration $(buildConfiguration)
@@ -24,3 +26,11 @@ steps:
 
 - script: dotnet test apis/poi/tests/UnitTests/UnitTests.csproj
   displayName: 'dotnet test'
+
+- task: AzureCLI@2
+  inputs:
+    azureSubscription: 'OTA-PRD-447(5f20e20f-aa5b-4aef-b6a0-6a17499fad01)'
+    scriptType: 'bash'
+    scriptLocation: 'inlineScript'
+    inlineScript: 'az acr build --image "devopsoh/api-poi:${BASEIMAGETAG}" --registry $ACRNAME --file Dockerfile'
+    workingDirectory: '/apis/poi/web'
