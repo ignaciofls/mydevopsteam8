@@ -17,7 +17,7 @@ pool:
 
 variables:
   buildConfiguration: 'Release'
-  ACRNAME: 'openhackt259mvo0acr.azurecr.io'
+  ACRNAME: 'openhackt259mvo0acr'
   BASEIMAGETAG: 'v1' 
 
 steps:
