@@ -7,7 +7,7 @@ namespace poi.Models
     {
         public Healthcheck()
         {
-            Message = "POI Service Healthcheck";
+            Message = "POI Service Healthcheck. Docker Image: \""+Environment.GetEnvironmentVariable("DOCKER_CUSTOM_IMAGE_NAME")+"\"";
             Status = "Healthy";
         }
         [Newtonsoft.Json.JsonProperty(PropertyName = "message")]
